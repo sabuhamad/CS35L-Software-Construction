@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Syllabus for UCLA Computer Science 35L</title>
+<meta charset='UTF-8'>
+<link rel='author' href='mailto:eggert@cs.ucla.edu'>
+<link rel='license' href='copyright.html'>
+</head>
+
+<body>
+
+<h1>Syllabus for UCLA Computer Science 35L<br>
+Software Construction Laboratory</h1>
+
+<p><small>[<a href='index.html'>class home</a>]</small></p>
+
+<p>No textbook is needed;
+   online material will be referred to extensively.</p>
+
+<h2>Project</h2>
+
+<p>A major part of this course is a collaborative
+  software <a href='project.html'>project</a>, in which student groups
+  design and construct a user-facing application involving multiple
+  software components that communicate across a network.</p>
+
+<h2>Lectures</h2>
+
+<h3>Files, editing, and shells</h3>
+ <ul>
+  <li>Multiuser and multiprocess operating systems</li>
+  <li>CLI basics (e.g.,
+    <a href='https://www.gnu.org/software/bash/'>Bash</a>)</li>
+  <li>Unix file system organization</li>
+  <li>Basic shell commands:
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/ls.html'>ls</a>;
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/pwd.html'>pwd</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cd.html'>cd</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/mkdir.html'>mkdir</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/rmdir.html'>rmdir</a>;
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/echo.html'>echo</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cat.html'>cat</a>;
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cp.html'>cp</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/mv.html'>mv</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/ln.html'>ln</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/rm.html'>rm</a>;
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/chmod.html'>chmod</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/kill.html'>kill</a>,
+    <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/ps.html'>ps</a>,
+   <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html'>grep</a>,
+   <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html'>find</a></li>
+  <li>Documentation and
+   <a href='https://en.wikipedia.org/wiki/Man_page'>man pages</a></li>
+  <li><a href='https://www.gnu.org/software/emacs/'>Emacs</a>
+    basics: <a href='https://www.gnu.org/software/emacs/manual/html_node/emacs/Intro.html'>introduction</a>,
+    online tutorial (<samp>C-h&nbsp;t</samp>),
+    <a href='https://www.gnu.org/software/emacs/manual/html_node/emacs/Help.html'>help</a> (<samp>C-h&nbsp;?</samp>),
+    <a href='https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic.html'>basic editing</a>,
+    <a href='https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html'>directory editing</a>,
+    <a href='https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell.html'>running shell commands</a>,
+    <a href='https://www.gnu.org/software/emacs/manual/html_node/emacs/Building.html'>building programs</a>,
+    <a href='https://www.gnu.org/software/emacs/manual/eintr.html'>Emacs Lisp</a>.
+ </ul>
+
+<h3>Commands and basic scripting</h3>
+ <ul>
+  <li>The Unix shell as a scripting language</li>
+  <li>Pattern matching, wildcards and regular expressions</li>
+  <li>More advanced commands (e.g.,
+   <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html'>grep</a>,
+   <a href='http://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html'>find</a>)</li>
+  <li>Pipelines and redirection</li>
+  <li>Scripting for interactive applications, with
+    <a href='https://www.gnu.org/software/emacs/manual/html_node/eintr/index.html'>Emacs Lisp</a> as a case study</li>
+ </ul>
+
+<h3>Scripting and construction</h3>
+ <ul>
+  <li>Basics of <a href='https://python.org/'>Python</a></li>
+  <li><a href='http://www.oracle.com/technetwork/java/index.html'>Java</a>
+   as a compromise between interpreted and compiled languages</li>
+  <li>Building from source
+   <ul>
+    <li>Dependencies (e.g., <a href='https://www.gnu.org/software/make/'>make</a>, <a href='https://ant.apache.org/'>Apache Ant</a>)</li>
+    <li>Makefile basics</li>
+    <li>Programming with dependencies (e.g.,
+      <a href='https://www.gnu.org/software/automake/'>automake</a>,
+      <a href='https://www.gnu.org/software/autoconf'>autoconf</a>)</li>
+   </ul></li>
+ </ul>
+
+<h3>Client-server apps and user interfaces</h3>
+<ul>
+  <li>Scriptable user interfaces via
+    <a href='https://www.javascript.com/'>JavaScript</a></li>
+  <li>HTML and web protocols</li>
+  <li>Case study:
+    <a href='https://nodejs.org/en/'>Node.js</a>
+    and <a href='https://reactjs.org/'>React</a>.
+  </li>
+</ul>
+
+<h3>Package management</h3>
+ <ul>
+  <li>Dependencies and packages</li>
+  <li>Installing a package</li>
+  <li>Creating a package</li>
+  <li>Package management case study:
+    (e.g., <a href='https://packaging.python.org/'>Python packaging</a>)</li>
+ </ul>
+
+<h3>Change management</h3>
+ <ul>
+  <li>Creating and using patches (e.g.,
+     <a href='https://www.gnu.org/software/diffutils/'>diff</a> and
+   <a href='https://www.gnu.org/software/patch/'>patch</a>)</li>
+  <li>File-based version control, e.g.,
+    <a href='https://www.gnu.org/software/rcs/rcs.html'>RCS</a></li>
+  <li>Package-based version control, e.g.,
+    <a href='https://www.nongnu.org/cvs/'>CVS</a></li>
+  <li>Decentralized version control,
+    with <a href='https://git-scm.com/'>Git</a> as a case study
+   <ul>
+    <li>Commits</li>
+    <li>Branching and merging</li>
+    <li>Rebasing</li>
+    <li>Branching workflows</li>
+    <li>Searching</li>
+    <li>Advanced merging and conflict resolution</li>
+    <li>Remote branches</li>
+    <li>Submodules</li>
+    <li>Git internals</li>
+  </ul></li>
+ </ul>
+
+<h3>Low-level construction and debugging</h3>
+ <ul>
+  <li>Introduction to C</li>
+  <li>The C compilation and linking process</li>
+  <li>Debuggers and debugging tools, e.g.,
+    <a href='https://www.gnu.org/software/gdb/'>GDB</a>,
+    <a href='http://valgrind.org/'>Valgrind</a>,
+    <a href='https://www.ibm.com/developerworks/aix/library/au-unix-strace.html'>strace</a>.</li>
+  <li>C and system programming</li>
+  <li>Library calls vs. system calls</li>
+  <li>Ways in which a program can go wrong at the low level (e.g., buffer overruns)</li>
+  <li>Defenses against low-level misbehaviors</li>
+ </ul>
+
+<footer>
+<hr>
+<small>
+ &copy; 2020&ndash;2022 <a href='mail-eggert.html'>Paul Eggert</a>.
+ See <a href='copyright.html'>copying rules</a>.<br>
+
+ $Id: syllabus.html,v 1.34 2022/01/03 06:22:46 eggert Exp $
+</small>
+</footer>
+
+</body>
+</html>
