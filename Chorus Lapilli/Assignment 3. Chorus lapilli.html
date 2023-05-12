@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Assignment 3. Chorus lapilli</title>
+<meta charset='UTF-8'>
+<link rel='author' href='mailto:eggert@cs.ucla.edu'>
+<link rel='license' href='copyright.html'>
+</head>
+
+<body>
+
+<h1>Assignment 3. Chorus lapilli</h1>
+
+<p><small>[<a href='../index.html'>course home</a> &gt; <a href='../assign.html'>assignments</a>]</small></p>
+
+<section>
+<h2>Useful pointers</h2>
+
+<ul>
+  <li><a href='https://reactjs.org/'>React &ndash; A JavaScript library for building user interfaces</a></li>
+  <li><a href='https://reactjs.org/docs/hello-world.html'>Hello World</a> for React</li>
+  <li><a href='https://beta.reactjs.org/tutorial/tutorial.html'>Tutorial: Intro to React</a></li>
+  <li><a href='https://github.com/facebook/react'>React source code</a></li>
+</ul>
+</section>
+
+<section>
+  <h2>Background and motivation</h2>
+
+  <p>
+    This assignment is designed to let you build an app
+    of your own, so that you can see all its pieces.
+    This is in contrast with your main class project,
+    where your project team will build a client-server application
+    and most likely you will become expert in your part of the app
+    with only nodding familiarity with the rest.</p>
+
+  <p>
+    This assignment is supposed to be quite simple, because you should
+    be spending most of your time working on the project.  To help
+    keep it simple, you’ll do a tutorial on basic React, the
+    JavaScript runtime that is the basis for most of the student
+    projects.
+  </p>
+
+
+  <h2>A simple interactive game app</h2>
+
+  <p>
+    The goal of this assignment is to build a simple
+    application using React.
+  </p>
+
+  <p>
+    A secondary goal of this assignment is for you to record what you did.
+    This is so that someone else can build your app, and so that you
+    can see later what you did, to fix your app or to build a similar app.
+  </p>
+
+  <p>Start by reading the Hello World guide cited above.</p>
+
+  <p>
+    Next, build the simple tic-tac-toe game of the tutorial cited
+    above.
+    Use the tutorial’s Note’s steps with a local development
+    environment; call your app “<code>tic-tac-toe</code>”.
+    As you go, keep a log in the file <code>tic-tac-toe.txt</code> of what you
+    have done so that you can reproduce the results later. This should
+    not merely be a transcript of what you typed: it should be more like a
+    true lab notebook, in which you briefly note down what you did and
+    what happened. Write down every significant action that you take,
+    including installing and configuring components as well as any
+    code that you write.
+  </p>
+
+  <p>Next, take a breather and reread the source code of your app.
+    Although you needn’t understand every little detail of what it does,
+    it may well give you pointers about useful things to know about React,
+    <a href="https://www.javascript.com/">JavaScript</a>,
+    <a href="https://www.json.org/json-en.html">JSon</a>,
+    <a href='https://nodejs.org/en/'>Node.js</a>,
+    <a href="https://en.wikipedia.org/wiki/HTML">HTML</a>,
+    <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>,
+    <a href="https://en.wikipedia.org/wiki/Document_Object_Model">DOM</a>,
+    <a href="https://beta.reactjs.org/learn/writing-markup-with-jsx">JSX</a> and
+    <a href="https://beta.reactjs.org/learn/javascript-in-jsx-with-curly-braces">JavaScript in JSX</a>, and
+    <a href="https://developers.google.com/web/tools/chrome-devtools">Chrome
+      DevTools</a>,
+    <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">Firefox
+    dev tools</a>,
+    <a href="https://beta.reactjs.org/learn/rendering-lists">React list rendering</a>,
+    <a href="https://beta.reactjs.org/learn/preserving-and-resetting-state">React state preservation</a>,
+    etc.</p>
+
+  <p>Now, use your experience to build an app that lets you play a variant
+    of <a href='http://a-garbutt1215-sb.blogspot.com/2013/08/mens-morris.html'>terni
+    lapilli</a> (“three grains”), a popular board game in ancient
+    Rome.  We’ll call this variant <dfn>chorus lapilli</dfn>
+    (“dancing grains”) and you should call your app
+    “<code>chorus-lapilli</code>”.</p>
+
+  <p>Chorus lapilli is
+    like <a href='https://en.wikipedia.org/wiki/Tic-tac-toe'>tic-tac-toe</a>
+    in that players take turn placing pieces on a 3×3 board
+    and the goal is to get three pieces in a row.
+    However, it differs from tic-tac-toe in two ways:</p>
+  <ul>
+    <li>After your first three moves, instead of adding further
+      pieces you must instead move one of your existing pieces to an
+      adjacent empty square. Therefore, after your third move
+      you always occupy three squares. The move can be up, down, left, right,
+      or diagonal.
+    </li>
+    <li>If it is your turn to move and you have three pieces on the
+      board and one of your pieces is in the center square, your move
+      must either win or vacate the center square.
+    </li>
+  </ul>
+
+  <p>Keep a log of how you built your chorus lapilli app
+    in a file <code>chorus-lapilli.txt</code>.
+    Like your other log file, it should be a
+    complete set of steps to build your toy application,
+    that you could give to someone else to reproduce your game.
+  </p>
+
+  <p>When you have <code>chorus-lapilli</code> working, create a
+    gzipped tarball <code>chorus-lapilli.tgz</code> of it by
+    using <a href='https://docs.npmjs.com/cli-commands/pack.html'><code>npm
+    pack</code></a>. Use <code>npm pack</code>'s <code>--dry-run</code>
+    option before actually running it, and record its output
+    into your log.
+  </p>
+</section>
+
+<section>
+<h2>Submit</h2>
+
+<p>Submit the following files.</p>
+
+<ul>
+<li>The files <code>tic-tac-toe.txt</code> and <code>chorus-lapilli.txt</code>.<li>The <code>chorus-lapilli.tgz</code> tarball.</li>
+</ul>
+
+<p>The <code>.txt</code>  files should be ASCII text files, with no
+carriage returns. The shell
+command:</p>
+
+<pre><code>awk '/\r/' tic-tac-toe.txt chorus-lapilli.txt
+</code></pre>
+
+<p>should not output any lines.</p>
+</section>
+
+<footer>
+<hr>
+<small>
+ &copy; 2020&ndash;2023
+ <a href='../mail-eggert.html'>Paul Eggert</a>.
+ See <a href='../copyright.html'>copying rules</a>.<br>
+
+ $Id: assign3.html,v 1.45 2023/02/09 04:55:04 eggert Exp $
+</small>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+#!/bin/bash
+tr -cd 'A-Za-z\n' < linux.words | sort -u > sorted.words
+tr -cd 'A-Za-z\n[:blank:]' | tr -s '[:blank:]' '\n' |  sort -u | comm -23 - sorted.words 

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Assignment 5. Low-level refactoring and performance</title>
+<meta charset='UTF-8'>
+<link rel='author' href='mailto:eggert@cs.ucla.edu'>
+<link rel='license' href='copyright.html'>
+</head>
+
+<body>
+
+<h1>Assignment 5. Low-level refactoring and performance</h1>
+
+<p><small>[<a href='../index.html'>course home</a> &gt; <a href='../assign.html'>assignments</a>]</small></p>
+
+<section>
+
+<h2>Introduction</h2>
+
+  <p>This assignment is designed to give you some skills with
+    low-level programming, which is used in later courses
+    like the operating system class, as well as in
+    real-world applications like the
+    <a href='https://en.wikipedia.org/wiki/Internet_of_Things'>Internet
+      of things (IoT)</a>. You’ll start with a working program; you’ll
+      add a few features,
+      and <a href='https://en.wikipedia.org/wiki/Performance_tuning'>tune</a>
+      and <a href='https://en.wikipedia.org/wiki/Code_refactoring'>refactor</a>
+      the program to make it better.
+  </p>
+
+<p><em>Note:</em> Use a private local Git repository (not a repository
+  host like GitHub) to keep track of your work in this assignment
+  when you’re modifying code, data, or <samp>notes.txt</samp>.
+  Don’t put big output files into your repository;
+  use it only for sources that you maintain by hand.
+
+</p>
+</section>
+
+<section>
+<h2>Useful pointers</h2>
+
+<ul>
+ <li>Jeremy W. Sheaffer <em>et al</em>,
+  <a href='https://uva-cs.github.io/pdr/tutorials/09-c/index.html'>C
+    tutorial for C++ programmers</a> (2022)</li>
+ <li><a href='https://sourceware.org/gdb/download/onlinedocs/gdb/'>Debugging
+  with <span style="font-variant: small-caps;">gdb</span></a> (2022)</li>
+ <li><a
+  href='https://valgrind.org/docs/quick-start.html'>Valgrind Quick Start
+  Guide</a> (2022)</li>
+ <li><a
+  href='https://valgrind.org/docs/manual/manual.html'>Valgrind User Manual</a>
+  (2022)</li>
+</ul>
+</section>
+
+<section>
+<h2>Homework: Tuning and refactoring a C program</h2>
+
+<p>Keep a log in the file <samp>notes.txt</samp> of what you
+do in the homework so that you can reproduce the results later. This should
+not merely be a transcript of what you typed: it should be more like a
+true lab notebook, in which you briefly note down what you did and
+what happened.</p>
+
+<p>You’re trying to generate large quantities of random numbers
+  for use in a machine-learning experiment.
+  You have a program <samp>randall</samp> that
+  can generate random byte streams, but it has problems.
+  You want it to be (a) faster and (b) better-organized.</p>
+
+<p>You can find a copy of a repository for the
+  <samp>randall</samp> source code in the
+  tarball <a href='randall-git.tgz'><samp>randall-git.tgz</samp></a>.
+  Unpack that tarball, clone the resulting repository,
+  and look at the resulting source code. It should
+  contain:</p>
+
+<ul>
+  <li>A <samp>.gitignore</samp> file listing built files that
+    Git should ignore (and that you should not commit).
+    Feel free to update this file if it’s incomplete for your work.</li>
+  <li>A <samp>COPYING</samp> file giving license permissions
+    for this program.</li>
+  <li>A <samp>Makefile</samp> that can build the program
+    <samp>randall</samp> and can build the tarball.</li>
+  <li>A file <samp>randall.c</samp> that is a single main program,
+    which you would like to modularize.</li>
+</ul>
+
+<p>Add <samp>notes.txt</samp> to your clone of the repository,
+and commit changes to it as needed while you work on this assignment.</p>
+
+<p>Read and understand the code in <samp>randall.c</samp>
+  and in <samp>Makefile</samp>.</p>
+
+<p>Modify the <samp>Makefile</samp> so that the command
+  '<samp>make check</samp>' tests your program.  You can supply just a
+  simple test, e.g., that the output is the correct length. You’re
+  doing this step first because you believe
+  in <a href='https://www.cse.unr.edu/~dascalus/Paper_JAMES.pdf'>test-driven
+  development (TDD)</a>.</p>
+
+<p>Next, split the <samp>randall</samp> implementation by copying
+  its source code into the following modules, which you will need to
+  likely need to modify to get everything to work:</p>
+
+<ul>
+  <li> <samp>options.c</samp> with header <samp>options.h</samp>,
+    which does command-line options processing. Initially
+    there isn’t very much of this.</li>
+  <li> <samp>output.c</samp> with header <samp>output.h</samp>,
+    which does the output.</li>
+  <li> <samp>rand64-hw.c</samp> with header
+    <samp>rand64-hw.h</samp>, which does the hardware-based
+    random-number generation.</li>
+  <li> <samp>rand64-sw.c</samp> with header
+    <samp>rand64-sw.h</samp>, which does the software-based
+    random-number generation.</li>
+  <li><samp>randall.c</samp> should contain the main program that
+    glues together everything else. It should include
+    the <samp>.h</samp> files mentioned above, and use
+    their APIs to do its work.</li>
+</ul>
+
+<p>You may add other modules if you like.
+  Each module should <samp>#include</samp> only the
+files that it needs; for example, since <samp>rand64-hw.c</samp> doesn't
+need to do I/O, it shouldn't <samp>#include</samp> <a
+href='https://www.opengroup.org/onlinepubs/9699919799/basedefs/stdio.h.html'><samp>&lt;stdio.h&gt;</samp></a>. Also, each
+module should keep as many symbols private as it can.</p>
+
+<p>Next, modify the <samp>Makefile</samp> to compile and link
+  your better-organized program.</p>
+
+<p>Next, add some options to your program to help you try to improve
+  its performance.  Redo the program so that it has an
+  option '<samp>-i <var>input</var></samp>',
+  where <samp><var>input</var></samp> is one of the following:</p>
+
+<ul>
+  <li> <samp>rdrand</samp> &ndash; the hardware random-number generation
+    supported by x86-64 processors if available; <samp>randall</samp>
+    should issue an error message and fail if it is not available.
+    This option is the default.</li>
+  <li> <samp>mrand48_r</samp> &ndash; the <a href='https://www.gnu.org/software/libc/manual/html_node/SVID-Random.html#index-mrand48_005fr'><samp>mrand48_r</samp></a> function
+    of the GNU C library.</li>
+  <li> <samp>/<var>F</var></samp> (i.e., any argument beginning
+    with <samp>/</samp>) &ndash; use the file <samp>/<var>F</var></samp>
+    as a source of random data, instead of
+    using <a href='https://man7.org/linux/man-pages/man7/random.7.html'><samp>/dev/random</samp></a>.</li>
+</ul>
+
+<p> Also, redo the program so that it has an
+option <samp>-o <var>output</var></samp>,
+where <samp><var>output</var></samp> is one of the following:</p>
+
+<ul>
+  <li> <samp>stdio</samp> &ndash; Use <samp>stdio</samp> output,
+    as before. This is the default.</li>
+  <li> <samp><var>N</var></samp> (a positive decimal integer) &ndash;
+    Output <samp><var>N</var></samp> bytes at a time, using
+    the <samp>write</samp> system call.
+    If the <samp>write</samp> call reports a successful write of
+    fewer than <samp><var>N</var></samp> bytes, do not consider this
+    to be an error; just add the successfully-written number
+    of bytes to your count of bytes written. The last output block might
+    be smaller than usual, if needed to get the total size to be
+    correct. You can use
+    the <a href='https://www.opengroup.org/onlinepubs/9699919799/functions/malloc.html'><samp>malloc</samp></a>
+    function to allocate your output buffer.</li>
+</ul>
+
+<p>You can
+use <a href='https://pubs.opengroup.org/onlinepubs/9699919799/functions/getopt.html'><samp>getopt</samp></a>
+to implement your option processing.</p>
+
+<p>Add some '<samp>make check</samp>' tests to check your additions
+  to <samp>randall</samp>.</p>
+
+<p>When debugging, you may find the <samp>valgrind</samp> program useful.
+Also, the
+<a href='https://github.com/google/sanitizers/wiki/AddressSanitizer'>AddressSanitizer
+(asan)</a> and the
+<a href='https://developers.redhat.com/blog/2014/10/16/gcc-undefined-behavior-sanitizer-ubsan/'>Undefined Behavior Sanitizer (ubsan)</a>
+may be useful; these can be enabled with the GCC
+options <a href='https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html'><samp>-fsanitize=address</samp> and <samp>-fsanitize=undefined</samp></a>,
+respectively.
+</p>
+
+<p>If the program encounters an error of any kind (including
+option, output and memory allocation failures), it should report the error to
+<samp>stderr</samp> and exit with status 1; otherwise, the program
+should succeed and exit with status 0. The program need not report
+<samp>stderr</samp> output errors.</p>
+
+<p>Finally, time your implementation as follows ... </p>
+
+<pre><code>    # This is a sanity check to test whether you’re in the right ballpark.
+    time dd if=/dev/urandom ibs=8192 obs=8192 count=16384 >/dev/null
+
+    time ./randall 133562368 >/dev/null
+    time ./randall 133562368 | cat >/dev/null
+    time ./randall 133562368 >rand.data
+</code></pre>
+
+<p> ... except that you may need different numbers if your implementation
+  is faster or slower. Also you should try various combinations of
+  the above options to see which gives you random data the fastest.
+  One option that you should try is '<samp>-i <a href='https://man7.org/linux/man-pages/man7/random.7.html'>/dev/urandom</a></samp>'.</p>
+
+<p> Record your results (including your slow results)
+in <samp>notes.txt</samp>.</p>
+</section>
+
+<section>
+<h2>Submit</h2>
+
+<p>Submit two files:</p>
+<ol>
+  <li>The file <samp>randall-submission.tgz</samp>, which you can
+  build by running the command "<samp>make submission-tarball</samp>".
+  Test your tarball before submitting it, by extracting from it into
+    a fresh directory and by running '<samp>make check</samp>' there.</li>
+
+  <li>The file <samp>randall-git.tgz</samp>, which is a gzipped
+    tarball of your private local Git repository and configuration,
+    created by the command "<samp>make repository-tarball</samp>".</li>
+</ol>
+
+<p>Neither submitted file should be all that large, since it
+should contain only information about source files maintained by hand,
+as opposed to generated files.</p>
+
+<p>All source files should be ASCII text files, with no
+carriage returns, and with no more than 100 columns per line.
+The shell
+command</p>
+
+<pre><code>expand Makefile notes.txt *.c *.h |
+  awk '/\r/ || 100 &lt; length'
+</code></pre>
+
+<p>should output nothing.</p>
+</section>
+
+<footer>
+<hr>
+<small>
+ &copy; 2020&ndash;2023
+ <a href='../mail-eggert.html'>Paul
+ Eggert</a>.  See <a href='../copyright.html'>copying rules</a>.<br>
+
+ $Id: assign5.html,v 1.57 2023/02/16 22:51:46 eggert Exp $
+</small>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+Tic-tac-toe
+1. Created the app using $npx create-react-app tic-tac-toe
+2. Exported to browser using $npm start
+3. Navigated to tic-tac-toe > src > App.js
+4. Built a function called square that returns a button with the label X
+5. Renamed App.css as styles.css and ensured the correct css code is found within it
+6. Ensured the correct imports in index.js
+7. Update Square component in App.js to create 9 squares divided into 3 rows using <div> tags
+8. Renamed from Square to Board
+9. Define new function square which accepts a value to be displayed and rewrite code so that each square in the 3 rows takes in that function
+10. Make it so squares recognize when they get clicked
+11. Import state so squares remember when they are clicked
+12. Use the setValue function to set the value of the squares to ‘X’ whenever they are clicked
+13. Create an array to store all values on the board (to be able to later tell who won or lost)
+14. Make it so that you handle state management within the Board component instead of as a separate function
+15. Make it so that you can add O’s using a new constant in the Board component that stores which move is next but make X be the first move by default and make it so that the same square cannot be clicked more than once to change it using an early return if the square was already clicked
+16. Create a calculate winner function that uses the array values to calculate whether an X or O has won and run that function to check if someone won after every click
+17. Display text to show who goes next as well as who is the winner once all the squares are filled (place after handleClick function in Board component)
+

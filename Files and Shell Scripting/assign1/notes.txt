@@ -1,0 +1,74 @@
+LAB 1.4
+8. There are 6 occurrences of <ol>
+
+LAB 1.5
+1. 
+    - sh: /usr/bin/sh
+        - $which sh
+    - sleep: /usr/local/cs/bin/sleep
+        - $which sleep
+    - type: /usr/bin/type
+        - $which type
+2. 
+    - 2 executable programs in the directory that meet the criteria and they are ./sed and ./seq 
+            - Found by commands:  
+                - $cd /usr/bin 
+                - $ls -l se? 
+    - Sed: Stream editor for filtering and transforming text
+        - $man sed 
+    - Seq: Print a sequence of numbers from first to last in steps of increment
+        - $man seq
+3. The file being executed is called emacs-28.2 found by the path /usr/local/cs/bin/emacs-28.2
+    - $ls -l /usr/local/cs/bin/emacs
+4. 
+    -  /usr/bin/gcc: version 8.5.0
+        - $/usr/bin/gcc -v
+        - Exact Output given: gcc version 8.5.0 20210514 (Red Hat 8.5.0-10) (GCC)
+    - gcc: version 12.2.0
+        - $gcc -v
+        - Exact Output Given: gcc version 12.2.0 (GCC) 
+    - The versions are different because regular gcc is the one ran on through the path /usr/local/cs/bin/gcc which is different than /usr/bin/gcc 
+        - $which gcc
+5. u+sx,o-w means that for the user, u, the file has setuid, s, and executable, x, bits set, and for others, o, the w or write bit is unset. This means the user executing the file will have the permissions of the file owner and the file cannot be written to by others
+    - $man chmod
+6. 13 days have passed since the first day of lecture; List all files using command
+    - $find /usr/local/cs -type d -mtime -13
+7. 
+    - First, find directory of “find”: /usr/bin/
+        - $which find
+    - Then, find number of symbolic links: 258 symbolic 
+        - $find /usr/bin -type l | wc -l
+8.  
+    - First, go into the directory lib64
+        - $cd /usr/lib64
+    - Then list out the files from most to least recently modified
+        - $ls -alt
+    - Doing so will show that the oldest modified file in the directory is libbz2.so.1.0.6 which was last modified August 12th 2018
+9.  
+    - transpose-chars, transpose-lines, transpose-paragraphs, transpose-regions, transpose-sentences, transpose-sexps, transpose-words
+        - Found by the following commands:
+            - $emacs
+            - C-h a transpose RET
+10. It pastes the most recent kill or copy into the program leaving the cursor at the end of whatever was inserted. It can be invoked using the keystroke C-y
+11.  
+    - First access directories in linux and find there is a total of 318408 listed at the very top of the output
+        - Found by commands:
+            - $cd /usr/bin
+            - $ls -l
+    - Then access directories in emacs and find there is a total of 318484 listed at the very top of the output
+        - Found by commands
+            - $emacs
+            - C-x d /usr/bin
+    - The difference is in the number of directories listed in emacs and linux as emacs has 76 more listed in /usr/bin
+12. 
+3032126 3032126 3032126 ?        00:00:00     sshd
+3032131 3032126 3032126 ?        00:00:00       sshd
+3032133 3032133 3032133 pts/6    00:00:00         bash
+3045140 3045140 3032133 pts/6    00:00:00           ps
+    - First, make sure you are in the login shell, mine said -bash which means I am in the login shell
+        - $echo $0
+    - Next, list out the PID for the login shell, by looking at the PID of -bash by showing the process of the current shell (3032133)
+        - $ps
+    - Then, using the following command, search for the PID (3032133) amongst all the listed processes to find the ancestors and descendants marked by indentations
+        - $ps -ejH
+

@@ -1,0 +1,6 @@
+1. Search for file containing sentence; find that it is tz/northamerica on line 900
+    1. $git grep -n newspaper 
+2. Use git log to find the earliest commit of this line. Find that David Olson committed the changes with this statement on the commit c12b432741eed9a422fbf99fa27af6e7a941d88b on December 21st 1995
+    1. $git log -S "Even newspaper reports"
+3. Use git show to see the history which reveals that this statement was added on December 19th 1995 by Paul Eggert 
+    1. $git show c12b432741eed9a422fbf99fa27af6e7a941d88b

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cur=$(git rev-parse HEAD)
+prev=$(git rev-parse HEAD^)
+git diff "$prev" "$cur"

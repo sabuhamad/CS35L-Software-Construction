@@ -1,0 +1,20 @@
+1. Grep to find the commits that mention merge-tree
+    1. $git log --grep='merge-tree'
+2. Ctrl + f to find the commit that mentions “In read-only repositories…” find that there are 2 different hashes: bcf22f29df87f25582de0ac9274d1567fa16be6f and 19118cb8570e499e1a56e81740cee3d1c1206b44
+3. Select the older version: 19118cb8570e499e1a56e81740cee3d1c1206b44 Author: Junio C Hamano Date: Mon Oct 10 10:08:43 2022
+4. Found the differences in the code to lead to this update
+    1. $git diff 19118cb8570e499e1a56e81740cee3d1c1206b44^..19118cb8570e499e1a56e81740cee3d1c1206b44
++test_expect_success SANITY 'merge-ort fails gracefully in a read-only repository' '
++       git init --bare read-only &&
++       git push read-only side1 side2 side3 &&
++       test_when_finished "chmod -R u+w read-only" &&
++       chmod -R a-w read-only &&
++       test_must_fail git -C read-only merge-tree side1 side3 &&
++       test_must_fail git -C read-only merge-tree side1 side2
++'
++
+    1. This test case was added to the commit to fix the segfault issue
+
+$git format-patch 19118cb8570e499e1a56e81740cee3d1c1206b44
+Forms patch 0001-Start-2.39-cycle.patch
+

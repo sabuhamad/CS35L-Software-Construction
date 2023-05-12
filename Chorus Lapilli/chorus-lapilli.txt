@@ -1,0 +1,59 @@
+Chorus Lapilli
+1. Created the app using $npx create-react-app chorus-lapilli
+2. Exported to browser using $npm start
+3. Navigated to tic-tac-toe > src > App.js
+4. Built a function called square that returns a button with the label X
+5. Created new file named styles.css and ensured the correct css code is found within it
+6. Ensured the correct imports in index.js and it imports styles.css
+7. Update Square component in App.js to create 9 squares divided into 3 rows using <div> tags
+8. Renamed from Square to Board
+9. Define new function square which accepts a value to be displayed and rewrite code so that each square in the 3 rows takes in that function
+10. Make it so squares recognize when they get clicked
+11. Import state so squares remember when they are clicked
+12. Use the setValue function to set the value of the squares to ‘X’ whenever they are clicked
+13. Create an array to store all values on the board (to be able to later tell who won or lost)
+14. Make it so that you handle state management within the Board component instead of as a separate function
+15. Make it so that you can add O’s using a new constant in the Board component that stores which move is next but make X be the first move by default and make it so that the same square cannot be clicked more than once to change it using an early return if the square was already clicked (if there have been less than 6 moves made)
+16. Create a calculate winner function that uses the array values to calculate whether an X or O has won and run that function to check if someone won after every click (in the same early return as the previous step)
+17. Display text to show who goes next as well as who is the winner once all the squares are filled (place after handleClick function in Board component)
+18. Add a state called moves which counts how many moves occur each turn and increment after every successful placement of a piece
+19. Use an if statement that checks if there are more than 6 moves and if so, prevent the user from adding any more elements to squares
+20. Create a function that accepts 2 elements and compares if the first is adjacent to the second by checking the first element and if the 2nd element would either be diagonal horizontal or vertical to it
+21. Add a state called existingClicked which checks if an existing marker was clicked on the turn it was supposed to be and switches to true if so. 
+22. Add another state called lastClicked which stores the location of the last clicked existing marker once a valid one is clicked so that it can be set to null once the marker is moved to a new square
+23. Add an else if after checking if existingClicked is false which determines if the existing marker was clicked on the previous turn (existingClicked is true) and if the lastClicked square index and the current clicked square index are adjacent using the adjacent function. If so place an X if xIsNext and an O otherwise but ensure that the square being switched to has the value of null so that the mark does not get switched to an occupied square.
+24. In this if else, make sure to set existingClicked to the opposite of its current state regardless of what happens because this accounts for a correct move being made or an existing mark being clicked then an illegal move being made so that it resets it to the base case where it checks for the existing mark being clicked.
+25. Implement a function to check if either piece is in the center and add a condition that a piece can only be moved as long as there is none in the center or the center piece moves or the piece moved will cause the player to win the game
+
+Dry-Run Output:
+npm notice 
+npm notice 📦  chorus-lapilli@0.1.0
+npm notice === Tarball Contents === 
+npm notice 3.4kB README.md             
+npm notice 797B  package.json          
+npm notice 3.9kB public/favicon.ico    
+npm notice 1.7kB public/index.html     
+npm notice 5.3kB public/logo192.png    
+npm notice 9.7kB public/logo512.png    
+npm notice 492B  public/manifest.json  
+npm notice 67B   public/robots.txt     
+npm notice 564B  src/App.css           
+npm notice 4.7kB src/App.js            
+npm notice 246B  src/App.test.js       
+npm notice 974B  src/index.css         
+npm notice 535B  src/index.js          
+npm notice 2.6kB src/logo.svg          
+npm notice 362B  src/reportWebVitals.js
+npm notice 241B  src/setupTests.js     
+npm notice === Tarball Details === 
+npm notice name:          chorus-lapilli                          
+npm notice version:       0.1.0                                   
+npm notice filename:      chorus-lapilli-0.1.0.tgz                
+npm notice package size:  26.1 kB                                 
+npm notice unpacked size: 35.6 kB                                 
+npm notice shasum:        515df7260a37fe7c5de6d7e7c21fe764d6306acd
+npm notice integrity:     sha512-3lcZ5tCbG/RgT[...]FKv9mitiVAFYw==
+npm notice total files:   16                                      
+npm notice 
+chorus-lapilli-0.1.0.tgz
+

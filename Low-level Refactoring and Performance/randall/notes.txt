@@ -1,0 +1,41 @@
+1. Create the check for make check, understanding that randall takes in nbytes
+-Test when randall is passed 10 and 100 bytes and compare to actual output
+2. Break the randall.c file down into its different parts
+-Create valid header files with correct headers for hw sw options and output
+-Move hw and sw implementations to their own header and c files
+-Place the options and output implementations into the respective c and header files 
+-Ensure randall.c can properly handle the different files and includes all of the required header
+-Ensure the code in Makefile properly compiles and links all the files
+3. Create mrand48 files to add a different option and edit so that randall includes those new files
+4. Incorporate new inputs for options -i and -o; also edit randall.c to incorporate this new struct
+5. Make sure that the software implementation can handle filename inputs 
+-Global var that takes the value of input and passes to software implementation
+6. Incorporate test cases with all the different options of -i and -o
+7. Solve any bugs and test again
+
+# This is a sanity check to test whether you’re in the right ballpark.
+    time dd if=/dev/urandom ibs=8192 obs=8192 count=16384 >/dev/null
+        real    0m0.960s
+        user    0m0.013s
+        sys     0m0.922s
+    time ./randall 133562368 >/dev/null
+        real    0m4.053s
+        user    0m4.015s
+        sys     0m0.021s    
+    time ./randall 133562368 | cat >/dev/null
+        real    0m3.989s
+        user    0m3.878s
+        sys     0m0.249s
+    time ./randall 133562368 >rand.data
+        real    0m5.005s
+        user    0m3.922s
+        sys     0m0.267s
+    time ./randall -i /dev/urandom 133562368 >/dev/null
+        real    0m2.548s
+        user    0m1.576s
+        sys     0m0.962s
+# FASTEST
+    time ./randall -i /dev/urandom -o 10000 133562368 >/dev/null
+        real    0m1.347s
+        user    0m0.373s
+        sys     0m0.942s

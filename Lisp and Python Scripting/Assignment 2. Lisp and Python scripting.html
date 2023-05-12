@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Assignment 2. Lisp and Python scripting</title>
+<meta charset='UTF-8'>
+<link rel='author' href='mailto:eggert@cs.ucla.edu'>
+<link rel='license' href='copyright.html'>
+</head>
+
+<body>
+
+<h1>Assignment 2. Lisp and Python scripting</h1>
+
+<p><small>[<a href='../index.html'>course home</a> &gt; <a href='../assign.html'>assignments</a>]</small></p>
+
+<p>As usual, do this assignment on the SEASnet GNU/Linux servers
+<samp>lnxsrv11</samp>, <samp>lnxsrv12</samp>,
+<samp>lnxsrv13</samp>, and <samp>lnxsrv15</samp>,
+with <samp>/usr/local/cs/bin</samp>
+prepended to your <samp>PATH</samp>.</p>
+
+<p>If you need a hint, ask a <abbr>TA</abbr> or an <abbr>LA</abbr>.
+This assignment is not intended to be done without any hints.</p>
+
+<section>
+<h2>Laboratory: Lisp scripting</h2>
+
+<ul>
+  <li><a href='https://www.gnu.org/software/emacs/tour/'>A Guided Tour of Emacs</a></li>
+  <li><a href='https://www.gnu.org/software/emacs/documentation.html'>Emacs
+  Documentation &amp; Support</a>
+</ul>
+
+<section>
+<h3>Exercise 2.1: Navigating through Emacs source code</h3>
+
+<p>The basic idea here is to get a mental model of how Emacs works
+  by looking at a bit of its keybindings and source code.</p>
+
+<p>Start up a fresh Emacs with a <samp>*scratch*</samp> buffer.</p>
+
+<p>To warm up, compute (2<sup>607 − 1</sup>) × (2<sup>607</sup> − 1)
+(i.e., <samp>2**(607 - 1) * (2**607 - 1)</samp>) in
+the <samp>*scratch*</samp> buffer, by using the <samp>expt</samp> and
+other functions.  This is the
+14th <a href='https://en.wikipedia.org/wiki/Perfect_number'>perfect
+number</a>, discovered in 1952.</p>
+
+<p>Use Emacs to determine how many bits it would take to represent
+this number in base-2 notation (not counting any sign bit),
+by writing a Lisp expression that yields the number of bits
+as an integer.</p>
+
+<p>Type <samp>M-:</samp> and use it to compute
+(2<sup>607 − 1</sup>) × (2<sup>607</sup> − 1).</p>
+
+<p>Get a list of keybindings by typing <samp>C-h b</samp>.</p>
+
+<p>Look for two keybindings: <samp>C-h k</samp> and <samp>M-SPC</samp>.
+  <samp>C-h k</samp> stands for “Type Control-h, then ‘k’.”
+  <samp>M-SPC</samp> is “Meta Space”; on good keyboards you can get
+  this by holding down Alt while hitting the space bar, but you may need to
+  type “Esc” and then follow by hitting the space bar.
+  We will examine these two keybindings in more detail.</p>
+
+<p>Type <samp>C-h k C-h k</samp> and describe what happens and why.
+  (This should relate to the <samp>C-h b</samp> output mentioned
+  previously.)</p>
+
+<p>Type <samp>C-h k M-SPC</samp> and describe what happens and why.
+  (This should also relate.)</p>
+
+<p>Try out <samp>M-SPC</samp> on some sample text with a lot of white
+  space, to see how it works.</p>
+
+<p>Visit the source code for the function that implements <samp>M-SPC</samp>,
+  by going to its help and clicking (or typing RET) on its source
+  file name.</p>
+
+<p>Notice how <samp>M-SPC</samp> is implemented in terms of a more-general
+  function, which does not have a keybinding. Use <samp>M-:</samp> to
+  execute this more-general function on a buffer, such that the
+  function changes the buffer’s contents.</p>
+
+<p>Similarly, use <samp>M-x</samp> to execute the more-general function
+  on a buffer.</p>
+
+<h3>Exercise 2.2: Scripting Emacs</h3>
+
+<p>Use the Emacs command <samp>M-x what-line</samp> and see what it does.</p>
+
+<p><samp>M-x what-line</samp> simply tells you what
+  line you are on, not how many lines are in the buffer.
+  Design and implement a command <samp>M-x gps-line</samp>
+  that acts like <samp>M-x what-line</samp> except that
+  it says “<samp>Line 27/106</samp>” in contexts where
+  <samp>M-x what-line</samp> would merely say “<samp>Line 27</samp>”;
+  here, it’s assumed the buffer has 106 lines.
+  Do this by using <samp>C-h f</samp> to get help about
+  <samp>what-line</samp>, navigating through that help to
+  find its source code, putting a copy of the source code
+  into a new file <samp>gps-line.el</samp>, editing
+  that file, loading it into Emacs, and then executing
+  your new command.</p>
+
+<p>When counting all the lines in a buffer, simply count the number of
+  newline characters that it contains.  This means that if a buffer
+  ends in a non-newline, you should not count the characters after
+  the last newline to be part of another line.  Also, an
+  empty buffer has zero lines.</p>
+
+<p>Test your function on buffers that do not end in newline.
+  Your function should be able to say things like
+  “Line 1/0” and “Line 3/2”.</p>
+</section>
+</section>
+
+<section>
+<h2>Homework: Python scripting</h2>
+
+<ul>
+ <li>The Python Foundation, <a
+  href='https://docs.python.org/3/tutorial/'>The Python Tutorial</a> (2022)</li>
+</ul>
+
+<p>Consider the old-fashioned Python 2 script
+<a href='randline.py'><code>randline.py</code></a>.</p>
+
+<p>What happens when this script is invoked on an empty file like
+<code>/dev/null</code>, and why?</p>
+
+<p>What happens when this script is invoked with Python 3 rather
+than Python 2, and why? (You can run Python 3 on the SEASnet hosts by
+using the command <code>python3</code> instead
+of <code>python2</code>.)</p>
+
+<p>Use Emacs to write a new script <code>shuf.py</code> in the style
+of <code>randline.py</code> but using Python 3 instead.
+Your script should implement the GNU
+<code><a href='https://www.gnu.org/software/coreutils/manual/html_node/shuf-invocation.html'>shuf</a></code>
+command that is part of GNU Coreutils.
+GNU <code>shuf</code> is written in C, whereas
+you want a Python implementation so that you can more easily add
+new features to it.
+Your program should run on <code>/usr/local/cs/bin/python3</code>
+as installed on SEASnet.</p>
+
+<p>Your program should support the following <code>shuf</code>
+options, with the same behavior as GNU <code>shuf</code>:
+<code>--echo</code> (<code>-e</code>),
+<code>--input-range</code> (<code>-i</code>),
+<code>--head-count</code> (<code>-n</code>),
+<code>--repeat</code> (<code>-r</code>),
+and <code>--help</code>.
+As with GNU <code>shuf</code>, if <code>--repeat</code> (<code>-r</code>)
+is used without <code>--head-count</code> (<code>-n</code>),
+your program should run forever.
+Your program should also support
+zero non-option arguments or
+a single non-option argument “<code>-</code>”
+(either of which means read from standard input),
+or a single non-option argument other than “<code>-</code>”
+(which specifies the input file name).
+Your program need not support the other options of GNU <code>shuf</code>.
+As with GNU <code>shuf</code>, your program
+should report an error if given invalid arguments.</p>
+
+<p>Your solution should use the <code>argparse</code> module
+instead of the obsolescent <code>optparse</code>.
+It should not import any
+modules other than <code>argparse</code>,
+<code>string</code> and the non-<code>optparse</code>
+modules that <code>randline.py</code> already imports.
+Don’t forget to change its usage message to
+accurately describe the modified behavior.</p>
+
+<p>What happens when your <samp>shuf.py</samp> script is invoked
+with Python 2 rather than Python 3, and why?</p>
+
+<p>The <a href='https://www.python.org/downloads/release/python-3111/'>Python 3.11 release notes</a> say that Python 3.11 is significantly faster
+  than older releases. Can you measure the performance difference?
+Use Bash’s <code>time</code> command to compare the performance
+of your implementation when run via
+SEASnet’s <code>/usr/bin/python3</code> (which should predate Python 3.11),
+versus running it via <code>/usr/local/cs/bin/python3</code>
+(which should be Python 3.11 or later),
+versus running Coreutils <code>/usr/local/cs/bin/shuf</code>.
+Use Bash commands like the following to time these three benchmarks (this
+example is for Coreutils, and assumes <code>/usr/local/cs/bin</code>
+is at the start of your <code>PATH</code>):
+</p>
+
+<pre><samp>  time shuf &lt; /usr/share/unicode/ucd/BidiTest.txt &gt; /dev/null
+</samp></pre>
+
+<p>For each of these three benchmarks, run the benchmark at least three times
+on the text file shown above,
+and report the median of the sum of the user and system times.
+Do your benchmarks on the same SEASnet host, and document the CPU
+and operating system version of the SEASnet host you used
+by consulting the <code>lscpu</code> command and
+the <code>/etc/os-release</code> file.
+If your Python implementation runs on <code>/usr/local/cs/bin/python3</code>
+but not <code>/usr/bin/python3</code>, do not benchmark it on the latter;
+instead, briefly explain which features of the newer Python your program
+relies on, and why.
+</p>
+</section>
+
+<section>
+<h2>Submit</h2>
+
+<p>Submit the following files within a compressed tarball named
+  <samp>assign2.tgz</samp>.</p>
+<ul>
+  <li><samp>gps-line.el</samp></li>
+  <li><samp>shuf.py</samp></li>
+  <li><samp>notes.txt</samp>, a text file answering questions
+    (e.g., why structural pattern matching made no sense for your Python
+    program), and
+    containing any other notes or comments that you’d like us to see.</li>
+</ul>
+
+<p>All files other than the <samp>.drib</samp> files should use
+  GNU/Linux style,
+  i.e., <a href='https://en.wikipedia.org/wiki/UTF-8'>UTF-8</a>
+  encoding with <a href='https://en.wikipedia.org/wiki/CRLF#Representation'>LF-terminated lines</a>.</p>
+
+<p>The shell command:</p>
+
+<pre><samp>tar -tvf assign2.tgz</samp>
+</pre>
+
+<p>should output a list of file names that contains <samp>gps-line.el</samp>
+  etc., with sizes and other metainformation about the files.</p>
+<!--
+<p>Or maybe more lines, if something has gone wrong.</p>
+-<->-
+-->
+</section>
+
+<footer>
+<hr>
+<small>
+ &copy; 2005, 2007&ndash;2022
+ <a href='../mail-eggert.html'>Paul Eggert</a>, Steve
+ VanDeBogart, and Lei Zhang.
+ See <a href='../copyright.html'>copying rules</a>.<br>
+
+ $Id: assign2.html,v 1.12 2023/01/20 07:34:28 eggert Exp $
+
+</small>
+</footer>
+
+</body>
+</html>
+<!-- end of HTML resource -->

@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+import sys
+import subprocess
+from collections import defaultdict
+
+if len(sys.argv) != 1:
+    print("Usage: tzcount")
+    sys.exit(1)
+
+tz_counts = defaultdict(int)
+
+git_cmd = "git log --pretty=format:'%cd' --date=format:'%z'"
+git_output = subprocess.check_output(git_cmd, shell=True).decode("utf-8")
+
+for line in git_output.splitlines():
+    tz = line[-5:]  # extract the time zone from the date string
+    tz_counts[tz] += 1
+
+for tz, count in sorted(tz_counts.items()):
+    print(f"{tz} {count}")
+
+

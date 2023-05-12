@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Assignment 4. Basic change management</title>
+<meta charset='UTF-8'>
+<link rel='author' href='mailto:eggert@cs.ucla.edu'>
+<link rel='license' href='copyright.html'>
+</head>
+
+<body>
+
+<h1>Assignment 4. Basic change management</h1>
+
+<p><small>[<a href='../index.html'>course home</a> &gt; <a href='../assign.html'>assignments</a>]</small></p>
+
+<section>
+<h2>Useful pointers</h2>
+
+<ul>
+  <li>Scott Chacon, <a href='http://git-scm.com/book'>Pro Git</a>.
+    Read the following:
+    &sect;&sect;1&ndash;3 (basics and branching),
+    &sect;5 (distributed version control),
+    &sect;7.1 (revision selection),
+    &sect;7.5 (searching), and
+    &sect;7.10 (debugging).
+  </li>
+  <li>You may also want to refer to
+    the <a href='https://git-scm.com/'>Git</a> web site. Git is
+    written by Linus Torvalds, Jun Hamano <em>et al.</em>
+  </li>
+</ul>
+</section>
+
+<section>
+<h2>Laboratory A: Exploring a linear development history</h2>
+
+This lab uses the <a href='https://github.com/eggert/tz'>development
+  repository</a> for
+  the <a href='https://www.iana.org/time-zones'>Time Zone Database
+  (tzdb)</a>.
+
+<ol>
+
+  <li>Use GitHub from a browser to compute the difference between
+    the previous and current commit to this repository.
+    Save the resulting web page as a file <samp>prevcur.html</samp>.</li>
+
+  <li>Use GitHub from a browser to compute the difference between
+    tzdb releases 2022f and 2022g.
+    Save the resulting web page as a file <samp>2022f-2022g.html</samp>.</li>
+
+  <li>Clone the tzdb development repository, in Git format.</li>
+
+  <li>Write a shell or Python script <samp>justone</samp> that
+    displays the difference from the previous and current commit,
+    assuming the repository is what an ordinary Git command would use.
+    Use your command on the just-cloned repository, and put the output
+    of your command into a file <samp>justone.out</samp>.
+
+  <li>Write a shell or Python script <samp>compare-releases</samp>
+    that displays the difference between two tzdb releases given as
+    arguments to the command.  For example, <samp>compare-releases
+    2022f 2022g</samp> should output the difference between tzdb
+    release 2022f and tzdb release 2022g.  Put the output of this
+    particular invocation into a file <samp>2022f-2022g.diff</samp>.
+
+  <li>Suppose we’re interested in the number of commits from each time
+    zone. Write a shell or Python script <samp>tzcount</samp> that
+    postprocesses the output of <samp>git log</samp> and outputs a
+    simple report of time zones and number of commits from that time
+    zone.  Each line of output should look something like “<samp>-0500
+    1802</samp>”, meaning there were 1802 commits from the &minus;0500 time
+    zone. Use the commit date, not the author date, to determine
+    the time zone of the commit.
+    Sort the output numerically by its first (numeric timezone)
+    column. Run the command <samp>git log 2012j..2022g | ./tzcount</samp>
+    using
+    the tzdb repository, and put its output into a
+    file <samp>tzdb-2012j-2022g.tzcount</samp>.</li>
+
+  <li>Suppose the maintainer of tzdb is being sued for copyright infringement
+    because one of the source files contains the following sentence:
+    “Even newspaper reports present contradictory information.”
+    Also suppose the plaintiff claims that this statement was improperly
+    copied from the plaintiff’s book.  Use Git and other commands to
+    find out how this statement was originally
+    introduced to the tzdb files. (This is not the same thing
+    as merely finding the last change to the lines containing
+    the statement in question.) Create a text file
+    <samp>who-contributed.txt</samp> that describes what commands
+    and/or scripts that you used, and what the result of your
+    investigation was.</li>
+</ol>
+</section>
+
+<section>
+<h2>Laboratory B: Exploring nonlinear development histories</h2>
+
+<p>Examine the copy of
+<a href='https://github.com/git/git'>Git’s own git repository</a> on
+SEASnet in the directory
+<samp>~eggert/src/github/git</samp>.
+</p>
+<ol>
+  <li>Find the mergepoint M at
+    c03bee6e9f5c05259f5f501e1f47cd8adb63af38 (committed 2022-10-02),
+    and draw the directed graph of all paths to M from
+    the commit 2a7d63a2453e2c30353342a2c9385fa22a846987 (committed
+    2022-09-26).
+    Label each node in your graph with the commit ID,
+    author, and committer if different.
+    Your graph should contain all the abovementioned
+    commits, along with any and all intervening commits; the arcs in
+    your path should be from child to parent. You need not graph
+    descendants of M, or ancestors of the other commits.
+  <li>Clone Git’s git repository yourself from GitHub,
+    and briefly describe the differences between your repository
+    and the one in <samp>~eggert/src/github/git</samp>.
+    (Hint: look at the output of <samp>git branch</samp>.)
+  </li>
+</ol>
+<p>Put your descriptions into a text file <samp>git.txt</samp>.
+Put your diagram into a PDF file <samp>git-graph.pdf</samp>.</p>
+
+<p>And now for a more open-ended search. The
+  <a href='https://github.com/git/git/blob/master/Documentation/RelNotes/2.39.0.txt'>Git
+  v2.39 Release Notes (2022-12-12)</a> say
+  “In read-only repositories, "git merge-tree" tried to come up with a
+   merge result tree object, which it failed (which is not wrong) and
+   led to a segfault (which is bad), which has been corrected.”
+  Which code change or changes actually made this happen, and who
+  authored the changes? Do not worry about subsequent administrative
+  changes such as merge commits; look for the original changes that
+  actually fixed the problem in question. Give the commit ID or IDs for the
+  relevant change or changes, and explain how you discovered them,
+  all in a text file <samp>git-detective.txt</samp>.
+  Also generate patch files for the relevant change or changes,
+  in <samp>git format-patch</samp> format.</p>
+
+</section>
+
+<section>
+<h2>Submit</h2>
+
+<p>Submit the following files at the top level
+  of a gzip-compressed tarball <samp>gitlabs.tgz</samp>. Your
+  tarball may contain other files if you think it necessary.</p>
+
+<ul>
+  <li><samp>prevcur.html</samp> web page</li>
+  <li><samp>2022f-2022g.html</samp> web page</li>
+  <li><samp>justone</samp> script</li>
+  <li><samp>justone.out</samp> output file</li>
+  <li><samp>compare-releases</samp> script</li>
+  <li><samp>2022f-2022g.diff</samp> output file</li>
+  <li><samp>tzcount</samp> script</li>
+  <li><samp>tzdb-2012j-2022g.tzcount</samp> output file</li>
+  <li><samp>who-contributed.txt</samp> infringement report</li>
+  <li><samp>git.txt</samp> descriptions</li>
+  <li><samp>git-graph.pdf</samp> descriptions</li>
+  <li><samp>git-detective.txt</samp> descriptions</li>
+  <li>The output files generated by <samp>git format-patch</samp>
+   in your detective work.</li>
+</ul>
+</section>
+
+<footer>
+<hr>
+<small>
+ &copy; 2020&ndash;2023 <a href='../mail-eggert.html'>Paul Eggert</a>.
+ See <a href='../copyright.html'>copying rules</a>.<br>
+
+ $Id: assign4.html,v 1.53 2023/02/09 04:50:00 eggert Exp $
+</small>
+</footer>
+
+</body>
+</html>

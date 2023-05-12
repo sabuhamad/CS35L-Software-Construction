@@ -1,0 +1,3 @@
+Graph with command: $git log 2a7d63a2453e2c30353342a2c9385fa22a846987^..c03bee6e9f5c05259f5f501e1f47cd8adb63af38 --graph 
+
+Command git branch shows us the difference; the cloned repository contains one branch called master whereas the git branch in the path ~eggert/src/github/git contains 4 other branches: maint, next, seen, todo
